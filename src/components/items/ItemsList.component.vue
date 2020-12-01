@@ -10,11 +10,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-
-interface ItemInterface {
-  id: number;
-  name: string;
-}
+import { ItemInterface } from "@/models/items/Item.interface";
 
 export default defineComponent({
   props: {
