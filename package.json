@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "cross-env VUE_APP_API_CLIENT=mock vue-cli-service serve --mode development",
+    "build": "cross-env VUE_APP_API_CLIENT=live vue-cli-service build --mode production",
+    "build-mock": "cross-env VUE_APP_API_CLIENT=mock vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -22,12 +24,13 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/test-utils": "^2.0.0-0",
-    "vue-loader-v16": "npm:vue-loader@16.0.0-beta.7",
     "chai": "^4.1.2",
+    "cross-env": "^7.0.3",
     "node-sass": "^4.12.0",
     "prettier": "2.2.1",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
-    "typescript-tslint-plugin": "^0.5.5"
+    "typescript-tslint-plugin": "^0.5.5",
+    "vue-loader-v16": "npm:vue-loader@16.0.0-beta.7"
   }
 }
