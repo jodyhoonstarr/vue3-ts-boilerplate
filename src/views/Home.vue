@@ -11,7 +11,8 @@
 import { defineComponent, computed, onMounted } from "vue";
 import ItemsListComponent from "@/components/items/ItemsList.component.vue";
 import { ItemInterface } from "@/models/items/Item.interface";
-import store from "@/store";
+import { MutationType, StoreModuleNames } from "@/models/store";
+import { useItemsStore } from "@/store/items";
 
 export default defineComponent({
   name: "Home",
@@ -19,22 +20,23 @@ export default defineComponent({
     ItemsListComponent,
   },
   setup() {
+    const itemsStore = useItemsStore();
     const items = computed(() => {
-      return store.state.items;
+      return itemsStore.state.items;
     });
     const loading = computed(() => {
-      return store.state.loading;
+      return itemsStore.state.loading;
     });
 
     const onSelectItem = (item: ItemInterface) => {
-      store.dispatch("selectItem", {
+      itemsStore.action(MutationType.items.selectItems, {
         id: item.id,
         selected: !item.selected,
       });
     };
 
     onMounted(() => {
-      store.dispatch("loadItems");
+      itemsStore.action(MutationType.items.loadItems);
     });
 
     return {
